@@ -1,7 +1,26 @@
+Project folders
+>>beans- all classes, also called models
+>>dao- all interfaces
+>>dbDao- the implements of the interfaces
+>>db- connecting details to db and managing the connections
+
+
+-------------------------------------------------
+
+db >> ConnectionPool
+functions: getConnectionPool, getConnectionList, getConnection, releaseConnection
+problem:
+- connectionList requested as Set<> but it's in List<> for testing
+-testing unclear
+-need to add remove all connections
+note:
+I didn't understand it all that well
+September 30th recording
+
 
 db >> DBManager
 function: createQuery
 problem: createQuery without get yellow underline, resultSet = false,
 suggested change function to void
 
--CategoryEnum
+
