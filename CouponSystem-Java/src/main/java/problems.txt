@@ -3,3 +3,5 @@ db >> DBManager
 function: createQuery
 problem: createQuery without get yellow underline, resultSet = false,
 suggested change function to void
+
+-CategoryEnum
