@@ -88,7 +88,7 @@ public class DBManager {
 
     public static final String DROP_ALL = "DROP TABLE `db`.`company`, `db`.`coupon`, `db`.`category`, `db`.`customer`, `db`.`customersvscoupons`;";
 
-    public static ResultSet createQuery(String query, Map<Integer, Object> map, boolean isResultSet) throws SQLException, InterruptedException {
+    public static ResultSet createQuery(String query, Map<Integer, Object> map, boolean isResultSet) throws SQLException {
         Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
         PreparedStatement preparedStatement = connection.prepareStatement(query);
 
@@ -104,6 +104,12 @@ public class DBManager {
         preparedStatement.execute();
         return null;
     }
+
+    public static void closeConnection() throws SQLException {
+        Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
+        connection.close();
+    }
+
 
     public static void init() throws SQLException, InterruptedException {
 

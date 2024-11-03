@@ -23,4 +23,12 @@ function: createQuery
 problem: createQuery without get yellow underline, resultSet = false,
 suggested change function to void
 
+dbDao >> CompanyDBDAO
+function: getCompany
+problem: no coupon list to compare (no column in db also)
+comparing: id, name, password
 
+dao >> CompaniesDao
+function: getCompanyByID
+problem: changed name
+in instruction name is: "getOneCompany"

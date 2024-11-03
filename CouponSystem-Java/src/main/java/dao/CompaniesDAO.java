@@ -4,12 +4,15 @@ import beans.Company;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface CompaniesDAO {
-    boolean isCompanyExist(String email, String password) throws SQLException, InterruptedException;
     void addCompany(Company company) throws SQLException, InterruptedException;
-    void updateCompany(Company company);
-    void deleteCompany(int companyID);
-    ArrayList<Company> getAllCompanies();
-    Company getOneCompany(int companyID);
-}
+    void deleteCompany(int companyID) throws SQLException, InterruptedException;
+    void updateCompany(Company company, int id) throws SQLException;
+    Company getCompanyByID(Integer companyID) throws SQLException;
+    List<Company> getAllCompanies() throws SQLException;
+    boolean isCompanyExist(String email, String password) throws SQLException, InterruptedException;
+
+
+    }
