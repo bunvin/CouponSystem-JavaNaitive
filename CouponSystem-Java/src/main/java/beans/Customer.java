@@ -10,18 +10,39 @@ public class Customer {
     private String password;
     private ArrayList<Coupon> coupons;
 
-    //constractor
+    //builder
 
-    public Customer() {
+    public Customer() {}
+
+    public static Customer builder(){
+        return new Customer();
     }
 
-    public Customer(String firstName, String lastName, String email, String password, ArrayList<Coupon> coupons) {
+    public Customer id(int id){
+        this.id = id;
+        return this;
+    }
+
+    public Customer firstName(String firstName){
         this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.coupons = coupons;
+        return this;
     }
+
+    public Customer lastName(String lastName){
+        this.lastName = lastName;
+        return this;
+    }
+
+    public Customer email(String email){
+        this.email = email;
+        return this;
+    }
+
+    public Customer password(String password){
+        this.password = password;
+        return this;
+    }
+
 
     //getter setter toString
 
@@ -78,6 +99,7 @@ public class Customer {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", coupons=" + coupons +
-                '}';
+                '}'+"\n";
+
     }
 }

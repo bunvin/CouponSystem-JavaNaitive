@@ -1,7 +1,9 @@
 import beans.Company;
+import beans.Customer;
 import db.ConnectionPool;
 import db.DBManager;
 import dbDao.CompanyDBDao;
+import dbDao.CustomerDBDAO;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -10,8 +12,28 @@ public class Test {
     public static void main(String[] args) throws SQLException, InterruptedException {
 //DB DAO TESTING
         CompanyDBDao companyDBDao = new CompanyDBDao();
+        CustomerDBDAO customerDBDAO = new CustomerDBDAO();
 
-        //
+        //CUSTUMERDBDAO
+        Customer customer = Customer.builder()
+                .firstName("Jane")
+                .lastName("Doe")
+                .email("private@email.com")
+                .password("123");
+
+//        customerDBDAO.addCustomer(customer);
+//        customerDBDAO.addCustomer(customer);
+//        System.out.println(customerDBDAO.getAllCustomers());
+//        customerDBDAO.deleteCustomer(2);
+//        System.out.println(customerDBDAO.getAllCustomers());
+//        customerDBDAO.addCustomer(customer);
+//        customer.setFirstName("Joe");
+//        customerDBDAO.updateCustomer(customer,3);
+        System.out.println(customerDBDAO.getAllCustomers());
+        System.out.println(customerDBDAO.getCustomerByID(1));
+        System.out.println(customerDBDAO.isCustomerExist("private@email.com", "123"));
+        System.out.println(customerDBDAO.isCustomerExist("private@email.com", "12"));
+
         //COMPANYDBDAO
 //        Company company = new Company();
 //        company.setName("Storash");
