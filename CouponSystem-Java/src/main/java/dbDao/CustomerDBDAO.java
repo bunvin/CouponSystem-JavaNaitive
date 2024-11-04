@@ -1,6 +1,7 @@
 package dbDao;
 
 import beans.Company;
+import beans.Coupon;
 import beans.Customer;
 import dao.CustomersDAO;
 import daoQuery.CompanyDaoQuery;
@@ -100,6 +101,11 @@ public class CustomerDBDAO implements CustomersDAO {
                 .lastName(lastName)
                 .email(email)
                 .password(password);
+    }
+
+    @Override
+    public List<Coupon> getCustomerCoupons(int customerId) {
+        return List.of();
     }
 
 

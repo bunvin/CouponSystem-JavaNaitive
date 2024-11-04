@@ -115,6 +115,10 @@ public class CouponDBDAO  implements CouponsDAO  {
                 2, couponID
         );
         DBManager.createQuery(CouponDaoQuery.PURCHASE_COUPON, map, false);
+        Map<Integer, Object> map2 = Map.of(
+                1, couponID
+        );
+        DBManager.createQuery(CouponDaoQuery.UPDATE_AMOUNT_PURCHASE, map2, false);
         DBManager.closeConnection();
     }
 
@@ -126,6 +130,10 @@ public class CouponDBDAO  implements CouponsDAO  {
                 2, couponID
         );
         DBManager.createQuery(CouponDaoQuery.CANCEL_PURCHASE_COUPON, map, false);
+        Map<Integer, Object> map2 = Map.of(
+                1, couponID
+        );
+        DBManager.createQuery(CouponDaoQuery.UPDATE_AMOUNT_CANCEL, map2, false);
         DBManager.closeConnection();
     }
 }

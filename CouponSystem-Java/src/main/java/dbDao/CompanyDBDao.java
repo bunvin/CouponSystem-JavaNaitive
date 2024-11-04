@@ -53,15 +53,7 @@ public class CompanyDBDao implements CompaniesDAO {
         ResultSet resultSet = DBManager.createQuery(CompanyDaoQuery.GET_ONE_COMPANY_BY_ID, map, true);
         Company company = null;
         if (resultSet.next()) {
-            int id = resultSet.getInt("id");
-            String name = resultSet.getString("name");
-            String email = resultSet.getString("email");
-            String password = resultSet.getString("password");
-            return Company.builder()
-                    .id(id)
-                    .name(name)
-                    .email(email)
-                    .password(password);
+            company = getCompany(resultSet);
         }
         DBManager.closeConnection();
         return company;
