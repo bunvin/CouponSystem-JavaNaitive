@@ -3,6 +3,7 @@ import beans.Customer;
 import db.ConnectionPool;
 import db.DBManager;
 import dbDao.CompanyDBDao;
+import dbDao.CouponDBDAO;
 import dbDao.CustomerDBDAO;
 
 import java.sql.Connection;
@@ -13,6 +14,7 @@ public class Test {
 //DB DAO TESTING
         CompanyDBDao companyDBDao = new CompanyDBDao();
         CustomerDBDAO customerDBDAO = new CustomerDBDAO();
+        CouponDBDAO couponDBDAO = new CouponDBDAO();
 
         //CUSTUMERDBDAO
         Customer customer = Customer.builder()

@@ -65,7 +65,6 @@ public class DBManager {
             "    ON DELETE CASCADE\n" +
             "    ON UPDATE NO ACTION);";
 
-    //
     public static final String ADD_COMPANY_ID_TO_COUPON = "ALTER TABLE `db`.`coupon` \n" +
             "ADD INDEX `comapnyId_idx` (`companyId` ASC) VISIBLE;\n" +
             ";\n" +

@@ -1,7 +1,6 @@
 package dbDao;
 
 import beans.Company;
-import beans.Coupon;
 import dao.CompaniesDAO;
 import daoQuery.CompanyDaoQuery;
 import db.DBManager;
@@ -92,7 +91,7 @@ public class CompanyDBDao implements CompaniesDAO {
         }
     }
 
-    //EXTRA
+    @Override
     public Company getCompany(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
         String name = resultSet.getString("name");

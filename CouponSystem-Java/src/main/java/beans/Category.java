@@ -18,6 +18,16 @@ public enum Category {
         return numericalCategory;
     }
 
+    // Static method to get Category by numerical value
+    public static Category fromNumericalCategory(int numericalCategory) {
+        for (Category category : Category.values()) {
+            if (category.getNumericalCategory() == numericalCategory) {
+                return category;
+            }
+        }
+        throw new IllegalArgumentException("No category found for value: " + numericalCategory);
+    }
+
     public static Category randomUrgency(){
         return Category.values()[ThreadLocalRandom.current().nextInt(0,Category.values().length)];
     }

@@ -14,20 +14,62 @@ public class Coupon {
     private double price;
     private String image;
 
-    //constractors
+    //builder
     public Coupon() {
     }
 
-    public Coupon(int companyID, Category category, String title, String description, Date startDate, Date endDate, int amount, double price, String image) {
+    public static Coupon builder(){
+        return new Coupon();
+    }
+
+    public Coupon id (int id){
+        this.id = id;
+        return this;
+    }
+
+    public Coupon companyID (int companyID){
         this.companyID = companyID;
+        return this;
+    }
+
+    public Coupon category (Category category){
         this.category = category;
+        return this;
+    }
+
+    public Coupon title (String title){
         this.title = title;
+        return this;
+    }
+
+    public Coupon description (String description){
         this.description = description;
+        return this;
+    }
+
+    public Coupon startDate (Date startDate){
         this.startDate = startDate;
+        return this;
+    }
+
+    public Coupon endDate (Date endDate){
         this.endDate = endDate;
+        return this;
+    }
+
+    public Coupon amount (int amount){
         this.amount = amount;
+        return this;
+    }
+
+    public Coupon price (double price){
         this.price = price;
+        return this;
+    }
+
+    public Coupon image (String image){
         this.image = image;
+        return this;
     }
 
     //getter setter toString

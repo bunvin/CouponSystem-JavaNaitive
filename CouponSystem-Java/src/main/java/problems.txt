@@ -28,7 +28,13 @@ function: getCompany
 problem: no coupon list to compare (no column in db also)
 comparing: id, name, password
 
+beans >> Company
+function: builder.id
+in use in: getCompany, getCompanyById
+problem: is public, every use of builder can add an id, no setter.
+
 dao >> CompaniesDao
 function: getCompanyByID
 problem: changed name
 in instruction name is: "getOneCompany"
+

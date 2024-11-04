@@ -87,7 +87,7 @@ public class CustomerDBDAO implements CustomersDAO {
     }
 
 
-    //EXTRA
+    @Override
     public Customer getCustomer(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
         String firstName = resultSet.getString("firstName");

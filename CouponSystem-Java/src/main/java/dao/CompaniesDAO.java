@@ -2,6 +2,7 @@ package dao;
 
 import beans.Company;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,6 @@ public interface CompaniesDAO {
     Company getCompanyByID(Integer companyID) throws SQLException;
     List<Company> getAllCompanies() throws SQLException;
     boolean isCompanyExist(String email, String password) throws SQLException, InterruptedException;
-
+    Company getCompany(ResultSet resultSet) throws SQLException;
 
     }
