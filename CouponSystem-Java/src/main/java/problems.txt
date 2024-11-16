@@ -38,3 +38,11 @@ function: getCompanyByID
 problem: changed name
 in instruction name is: "getOneCompany"
 
+beans >> Company, Customer
+function: List<Coupon>
+to create a filtered Coupon list from DB
+should update when called getCoupon and saved in this.coupons
+
+dbDao >> Company
+function:
+

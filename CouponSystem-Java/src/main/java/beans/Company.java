@@ -1,5 +1,8 @@
 package beans;
 
+import dbDao.CompanyDBDao;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +12,8 @@ public class Company {
     private String email;
     private String password;
     private List<Coupon> coupons;
+
+    CompanyDBDao companyDBDao= new CompanyDBDao();
 
     public Company() {
     }
@@ -71,7 +76,11 @@ public class Company {
         this.password = password;
     }
 
-    public List<Coupon> getCoupons() {
+    public List<Coupon> getCoupons() throws SQLException {
+        List<Coupon> updatedCoupons = this.companyDBDao.getCompanyCoupons(this.id);
+        if (this.coupons == null || this.coupons.size() < updatedCoupons.size() ){
+            this.coupons = updatedCoupons;
+        }
         return this.coupons;
     }
 

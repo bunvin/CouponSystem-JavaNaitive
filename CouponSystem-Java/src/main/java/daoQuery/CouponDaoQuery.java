@@ -29,4 +29,13 @@ public class CouponDaoQuery {
             "UPDATE `db`.`coupon`\n" +
                     "SET `amount` = `amount` + 1\n" +
                     "WHERE `id` = ?;";
+
+
+        public static final String GET_CUSTOMER_COUPONS_BY_ID = "SELECT * \n" +
+                "FROM db.customersvscoupons\n" +
+                "INNER JOIN db.coupon\n" +
+                "ON customersvscoupons.couponId = coupon.id\n" +
+                "WHERE customerId = ? ;";
+
+
 }

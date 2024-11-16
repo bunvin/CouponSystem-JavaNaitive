@@ -1,6 +1,7 @@
 package dbDao;
 
 import beans.Company;
+import beans.Coupon;
 import dao.CompaniesDAO;
 import daoQuery.CompanyDaoQuery;
 import db.DBManager;
@@ -95,6 +96,24 @@ public class CompanyDBDao implements CompaniesDAO {
                     .email(email)
                     .password(password);
         }
+
+    @Override
+    public List<Coupon> getCompanyCoupons(int id) throws SQLException {
+        Map<Integer, Object> map = Map.of(
+                1, id
+        );
+        ResultSet resultSet = DBManager.createQuery(CompanyDaoQuery.GET_COMPANY_COUPONS_BY_ID, map, true);
+        ArrayList<Coupon> coupons = new ArrayList<>();
+        CouponDBDAO couponDBDAO = new CouponDBDAO();
+        while(resultSet.next()){
+           coupons.add(couponDBDAO.getCoupon(resultSet));
+        }
+        CompanyDBDao companyDBDao = new CompanyDBDao();
+        Company company = companyDBDao.getCompanyByID(id);
+        company.setCoupons(coupons);
+
+        return coupons;
+    }
 
 }
 

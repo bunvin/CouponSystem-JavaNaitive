@@ -1,6 +1,7 @@
 package dao;
 
 import beans.Company;
+import beans.Coupon;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,5 +16,6 @@ public interface CompaniesDAO {
     List<Company> getAllCompanies() throws SQLException;
     boolean isCompanyExist(String email, String password) throws SQLException, InterruptedException;
     Company getCompany(ResultSet resultSet) throws SQLException;
+    List<Coupon> getCompanyCoupons(int id) throws SQLException;
 
     }

@@ -105,7 +105,10 @@ public class CustomerDBDAO implements CustomersDAO {
 
     @Override
     public List<Coupon> getCustomerCoupons(int customerId) {
-        return List.of();
+        Map<Integer, Object> map = Map.of(
+                1, customerId
+        );
+
     }
 
 
