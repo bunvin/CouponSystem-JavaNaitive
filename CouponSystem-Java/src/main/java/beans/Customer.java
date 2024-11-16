@@ -1,6 +1,9 @@
 package beans;
 
+import dbDao.CustomerDBDAO;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Customer {
     private int id;
@@ -8,7 +11,9 @@ public class Customer {
     private String lastName;
     private String email;
     private String password;
-    private ArrayList<Coupon> coupons;
+    private List<Coupon> coupons;
+
+    CustomerDBDAO customerDBDAO = new CustomerDBDAO();
 
     //builder
 
@@ -82,8 +87,12 @@ public class Customer {
         this.password = password;
     }
 
-    public ArrayList<Coupon> getCoupons() {
-        return coupons;
+    public List<Coupon> getCoupons() {
+        List<Coupon> updatedCoupons = this.customerDBDAO.getCustomerCoupons(this.id);
+        if (this.coupons == null || this.coupons.size() < updatedCoupons.size() ){
+            this.coupons = updatedCoupons;
+        }
+        return this.coupons;
     }
 
     public void setCoupons(ArrayList<Coupon> coupons) {
