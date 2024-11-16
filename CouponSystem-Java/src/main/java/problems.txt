@@ -3,8 +3,6 @@ Project folders
 >>dao- all interfaces
 >>dbDao- the implements of the interfaces
 >>db- connecting details to db and managing the connections
-
-
 -------------------------------------------------
 
 db >> ConnectionPool
@@ -13,20 +11,14 @@ problem:
 - connectionList requested as Set<> but it's in List<> for testing
 -testing unclear
 -need to add remove all connections
-note:
+NOTE:
 I didn't understand it all that well
 September 30th recording
-
 
 db >> DBManager
 function: createQuery
 problem: createQuery without get yellow underline, resultSet = false,
 suggested change function to void
-
-dbDao >> CompanyDBDAO
-function: getCompany
-problem: no coupon list to compare (no column in db also)
-comparing: id, name, password
 
 beans >> Company
 function: builder.id
@@ -35,14 +27,18 @@ problem: is public, every use of builder can add an id, no setter.
 
 dao >> CompaniesDao
 function: getCompanyByID
-problem: changed name
+note: changed name
 in instruction name is: "getOneCompany"
 
-beans >> Company, Customer
-function: List<Coupon>
-to create a filtered Coupon list from DB
-should update when called getCoupon and saved in this.coupons
+facade >> ClientFacade
+functions: all
+problem: understanding
+create new Interface objects (CompaniesDAO , etc)
+are they, working? yes. sdded a customer
+should I import DBDAO instead of the DAO?
+Does it go directly to the interface?
 
-dbDao >> Company
-function:
+
+
+
 

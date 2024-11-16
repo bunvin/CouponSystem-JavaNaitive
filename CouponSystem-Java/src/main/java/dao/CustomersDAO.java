@@ -15,5 +15,5 @@ public interface CustomersDAO {
     Customer getCustomerByID(int customerID) throws SQLException;
     boolean isCustomerExist(String email, String password) throws SQLException;
     Customer getCustomer(ResultSet resultSet) throws SQLException;
-    List<Coupon> getCustomerCoupons(int customerId);
+    List<Coupon> getCustomerCoupons(int customerId) throws SQLException;
 }

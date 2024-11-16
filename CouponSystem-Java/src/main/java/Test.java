@@ -5,6 +5,7 @@ import db.DBManager;
 import dbDao.CompanyDBDao;
 import dbDao.CouponDBDAO;
 import dbDao.CustomerDBDAO;
+import facade.CustomerFacade;
 
 import java.sql.Connection;
 import java.sql.SQLException;

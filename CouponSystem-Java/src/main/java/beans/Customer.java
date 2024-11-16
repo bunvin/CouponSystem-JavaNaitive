@@ -2,6 +2,7 @@ package beans;
 
 import dbDao.CustomerDBDAO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +49,6 @@ public class Customer {
         return this;
     }
 
-
     //getter setter toString
 
     public int getId() {
@@ -87,7 +87,7 @@ public class Customer {
         this.password = password;
     }
 
-    public List<Coupon> getCoupons() {
+    public List<Coupon> getCoupons() throws SQLException {
         List<Coupon> updatedCoupons = this.customerDBDAO.getCustomerCoupons(this.id);
         if (this.coupons == null || this.coupons.size() < updatedCoupons.size() ){
             this.coupons = updatedCoupons;
@@ -95,20 +95,16 @@ public class Customer {
         return this.coupons;
     }
 
-    public void setCoupons(ArrayList<Coupon> coupons) {
+    public void setCoupons(List<Coupon> coupons) {
         this.coupons = coupons;
     }
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", coupons=" + coupons +
-                '}'+"\n";
+        return STR."""
+Customer{id=\{id}, firstName='\{firstName}', lastName='\{lastName}', email='\{email}', password='\{password}', coupons=\{coupons}}
+""";
 
     }
+
 }

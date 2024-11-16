@@ -104,13 +104,22 @@ public class CustomerDBDAO implements CustomersDAO {
     }
 
     @Override
-    public List<Coupon> getCustomerCoupons(int customerId) {
+    public List<Coupon> getCustomerCoupons(int customerId) throws SQLException {
         Map<Integer, Object> map = Map.of(
                 1, customerId
         );
+        ResultSet resultSet = DBManager.createQuery(CustomerDaoQuery.GET_CUSTOMER_COUPONS_BY_ID, map, true);
+        List<Coupon> coupons = new ArrayList<>();
+        CouponDBDAO couponDBDAO = new CouponDBDAO();
+        while(resultSet.next()){
+            coupons.add(couponDBDAO.getCoupon(resultSet));
+        }
+        CustomerDBDAO customerDBDao = new CustomerDBDAO();
+        Customer customer = customerDBDao.getCustomerByID(customerId);
+        customer.setCoupons(coupons);
 
+        return coupons;
     }
-
 
 }
 
