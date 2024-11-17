@@ -30,15 +30,11 @@ function: getCompanyByID
 note: changed name
 in instruction name is: "getOneCompany"
 
-facade >> ClientFacade
-functions: all
-problem: understanding
-create new Interface objects (CompaniesDAO , etc)
-are they, working? yes. sdded a customer
-should I import DBDAO instead of the DAO?
-Does it go directly to the interface?
-
-
+facade >> AdminFacade
+function: deleteCustomerById
+problem: when deleting purchase history, need to update coupon amount?
+possibility that the coupon already expired and deleted ?.
+need to think and look at it better.
 
 
 

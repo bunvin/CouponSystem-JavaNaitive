@@ -2,6 +2,8 @@ package dbDao;
 
 import beans.Category;
 import beans.Coupon;
+
+import beans.Customer;
 import dao.CouponsDAO;
 import daoQuery.CouponDaoQuery;
 import db.DBManager;
@@ -135,5 +137,37 @@ public class CouponDBDAO  implements CouponsDAO  {
         );
         DBManager.createQuery(CouponDaoQuery.UPDATE_AMOUNT_CANCEL, map2, false);
         DBManager.closeConnection();
+    }
+
+    @Override
+    public void deleteCouponPurchaseByCouponId(int couponID) throws SQLException {
+        Map<Integer, Object> map = Map.of(
+                1, couponID
+        );
+        DBManager.createQuery(CouponDaoQuery.CANCEL_PURCHASE_COUPON_BY_ID, map, false);
+        DBManager.closeConnection();
+    }
+
+    @Override
+    public void deleteCouponPurchaseByCustomerId(int customerID) throws SQLException {
+        Map<Integer, Object> map2 = Map.of(
+                1, customerID
+        );
+        DBManager.createQuery(CouponDaoQuery.CANCEL_PURCHASE_COUPON_BY_CUSTOMER_ID, map2, false);
+        DBManager.closeConnection();
+    }
+
+    @Override
+    public boolean isPurchased(int couponId) throws SQLException {
+        Map<Integer, Object> map = Map.of(
+                1, couponId
+        );
+        ResultSet resultSet = DBManager.createQuery(CouponDaoQuery.isPurchased,map,true);
+
+        if(resultSet.next()){
+            return true;
+        } else {
+            return false;
+        }
     }
 }

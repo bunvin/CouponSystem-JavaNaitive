@@ -11,15 +11,20 @@ import dbDao.CustomerDBDAO;
 import java.sql.SQLException;
 
 public class CustomerFacade extends ClientFacade{
+//    private final CompaniesDAO companiesDAO;
+//    private final CustomersDAO customersDAO;
+//    private final CouponsDAO couponsDAODAO;
 
-
-    public CustomerFacade(CompaniesDAO companiesDao, CouponsDAO couponsDAO, CustomersDAO customersDAO) {
-        super(companiesDao, couponsDAO, customersDAO);
+    public CustomerFacade() {
+        super();
     }
+
 
     public void addCustomer(Customer customer) throws SQLException {
         //add validation here
-        ClientFacade.customersDAO.addCustomer(customer);
+//        getCustomersDAO().addCustomer();
+
+        ;
     }
 
     @Override

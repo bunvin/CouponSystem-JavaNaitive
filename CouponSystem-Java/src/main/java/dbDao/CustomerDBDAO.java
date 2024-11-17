@@ -87,6 +87,19 @@ public class CustomerDBDAO implements CustomersDAO {
         }
     }
 
+    @Override
+    public boolean isCustomerEmailExist(String email) throws SQLException {
+        Map<Integer, Object> map = Map.of(
+                1, email
+        );
+        ResultSet resultSet = DBManager.createQuery(CustomerDaoQuery.IS_CUSTOMER_EMAIL_EXIST, map, true);
+        if(resultSet.next()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     @Override
     public Customer getCustomer(ResultSet resultSet) throws SQLException {

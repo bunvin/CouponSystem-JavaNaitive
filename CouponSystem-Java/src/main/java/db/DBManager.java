@@ -13,7 +13,8 @@ public class DBManager {
     public static final String URL = "jdbc:mysql://localhost:3306/db";
     public static final String USER_NAME = "root";
     public static final String PASSWORD = "1234";
-
+    public static final String ADMIN_EMAIL = "admin@admin.com";
+    public static final String ADMIN_PASSWORD = "admin";
 
     ///SQL queries for init tables
     public static final String ADD_COMPANY_TABLE = "CREATE TABLE `db`.`company` (\n" +

@@ -20,10 +20,17 @@ public class CouponDaoQuery {
             "WHERE `id` = ?;";
 
     public static final String CANCEL_PURCHASE_COUPON = "DELETE FROM `db`.`customersvscoupons` WHERE (`customerId` = " +
-            "? AND `couponId` = ?);\n +" +
-            "\"UPDATE `db`.`coupon`\\n\" +\n" +
-            "            \"SET `amount` = `amount` + 1\\n\" +\n" +
-            "            \"WHERE `id` = ?;\";";
+            "? AND `couponId` = ?);\n";
+//            +
+//            "\"UPDATE `db`.`coupon`\\n\" +\n" +
+//            "            \"SET `amount` = `amount` + 1\\n\" +\n" +
+//            "            \"WHERE `id` = ?;\";";
+
+    public static final String CANCEL_PURCHASE_COUPON_BY_CUSTOMER_ID = "DELETE FROM `db`.`customersvscoupons` WHERE " +
+            "(`customerId` = ? );";
+
+    public static final String CANCEL_PURCHASE_COUPON_BY_ID = "DELETE FROM `db`.`customersvscoupons` WHERE " +
+            "(`couponId` = ?);\n;";
 
     public static final String UPDATE_AMOUNT_CANCEL =
             "UPDATE `db`.`coupon`\n" +
@@ -36,6 +43,10 @@ public class CouponDaoQuery {
                 "INNER JOIN db.coupon\n" +
                 "ON customersvscoupons.couponId = coupon.id\n" +
                 "WHERE customerId = ? ;";
+
+        public static final String isPurchased = "SELECT * \n" +
+                "FROM db.customersvscoupons\n" +
+                "WHERE couponId = ?;";
 
 
 }
