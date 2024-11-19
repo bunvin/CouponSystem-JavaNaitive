@@ -85,7 +85,7 @@ public class CouponDBDAO  implements CouponsDAO  {
         return Coupon.builder()
                 .id(id)
                 .companyID(companyID)
-                .category(Category.fromNumericalCategory(categoryID))
+                //.category(Category.fromNumericalCategory(categoryID))
                 .title(title)
                 .description(description)
                 .startDate(startDate)

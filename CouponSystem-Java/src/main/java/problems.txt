@@ -33,8 +33,20 @@ in instruction name is: "getOneCompany"
 facade >> AdminFacade
 function: deleteCustomerById
 problem: when deleting purchase history, need to update coupon amount?
+IDAN: NO NEED TO UPDATE THE AMOUNT WHEN DELETED
 possibility that the coupon already expired and deleted ?.
 need to think and look at it better.
 
+
+facade >> AdminFacade
+function: update Company
+problem: working but ugly if statement
+the if statement targets
+1. Company name == dbCompany name
+2. Company Id == dbCompany Id OR Company Id == 0
+
+dao >> couponDAO
+function: getcoupon
+problem: if category is null throw exception
 
 

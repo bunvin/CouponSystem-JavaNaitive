@@ -5,8 +5,8 @@ import dao.CouponsDAO;
 import dao.CustomersDAO;
 
 public class CompanyFacade extends ClientFacade{
-    public CompanyFacade(CompaniesDAO companiesDao, CouponsDAO couponsDAO, CustomersDAO customersDAO) {
-        super(companiesDao, couponsDAO, customersDAO);
+    public CompanyFacade() {
+        super();
     }
 
     @Override

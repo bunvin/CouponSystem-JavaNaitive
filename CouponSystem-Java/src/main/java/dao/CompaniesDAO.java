@@ -17,6 +17,5 @@ public interface CompaniesDAO {
     boolean isCompanyExist(String email, String password) throws SQLException, InterruptedException;
     Company getCompany(ResultSet resultSet) throws SQLException;
     List<Coupon> getCompanyCoupons(int id) throws SQLException;
-    boolean isCompanyNameAndPasswordExist(String name, String email) throws SQLException, InterruptedException;
-
+    boolean isCompanyNameOREmailExist(String name, String email) throws SQLException, InterruptedException;
     }

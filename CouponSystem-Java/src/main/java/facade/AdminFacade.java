@@ -3,12 +3,10 @@ package facade;
 import beans.Company;
 import beans.Coupon;
 import beans.Customer;
-import daoQuery.CouponDaoQuery;
 import db.DBManager;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 //login
@@ -42,37 +40,36 @@ public class AdminFacade extends ClientFacade{
         isAdmin = false;
         return false;
     };
-    //NEED TESTING
+
     public void addCompany(Company company) throws Exception {
         //if company name and email not in database?
-        if(!getCompaniesDAO().isCompanyNameAndPasswordExist(
-                company.getName(), company.getEmail())
-        ){
+        if(getCompaniesDAO().isCompanyNameOREmailExist(company.getName(), company.getEmail())){
             throw new Exception("FAILED: Company's name or email already exist");
         }else{
             getCompaniesDAO().addCompany(company);
         }
     }
-    //NEED TESTING
-    public void updateCompany(int companyId, Company company) throws Exception {
+
+    public void updateCompany(Company company, int companyId) throws Exception {
         //if name and id are equal update
         Company dbCompany = getCompaniesDAO().getCompanyByID(companyId);
         if (company.getName().equals(dbCompany.getName())
-        && company.getId() == dbCompany.getId()){
+        && company.getId() == dbCompany.getId()
+        || company.getName().equals(dbCompany.getName())
+                && company.getId() == 0){
             getCompaniesDAO().updateCompany(company,companyId);
         }else{
-            throw new Exception("Companies name or id are un-updatable");
+            throw new Exception("FAILED: Companies name or id are un-updatable");
         }
     }
-//NEED TESTING
+
     public void deleteCompany(int companyId) throws Exception {
         // only if Company exist
         // get all coupons
         // delete all purchases and coupons
         // delete company
-
-        if(getCompaniesDAO().getCompanyByID(companyId) != null){
-            Company company = getCompaniesDAO().getCompanyByID(companyId);
+        Company company = getCompaniesDAO().getCompanyByID(companyId);
+        if (company != null){
             List<Coupon> coupons = company.getCoupons();
 
             if (coupons != null){
@@ -92,17 +89,15 @@ public class AdminFacade extends ClientFacade{
             throw new Exception("FAILED: Company ID not found");
         }
     }
-//NEED TESTING
+
 
     public List<Company> getAllCompanies() throws SQLException {
         return getCompaniesDAO().getAllCompanies();
     }
-//NEED TESTING
 
     public Company getCompanyById(int id) throws SQLException {
         return getCompaniesDAO().getCompanyByID(id);
     }
-    //NEED TESTING
 
     public void addCustomer(Customer customer) throws Exception {
         if ( getCustomersDAO().isCustomerEmailExist(customer.getEmail())){
@@ -120,35 +115,20 @@ public class AdminFacade extends ClientFacade{
         }
     }
 
-    //NEED TESTING
     public void deleteCustomer(int customerId) throws Exception {
-        //getCustomer //getCoupons
-        //update coupon amount //delete coupons
-        //delete customer
+        // get
         Customer customer = getCustomersDAO().getCustomerByID(customerId);
         List<Coupon> coupons = customer.getCoupons();
-
-        //update coupon amount
-        //NOTE:  need to check if coupon exist? always exist?
-    //PROBLEM NEED TO THINK ABOUT IT, amount in deleteCouponByCustomerId?
-        for (Coupon coupon : coupons){
-            Map<Integer, Object> map = Map.of(
-                    1, coupon.getId()
-            );
-            DBManager.createQuery(CouponDaoQuery.UPDATE_AMOUNT_CANCEL, map, false);
-        }
-
-        //delete customer purchase
+        //delete
         getCouponsDAO().deleteCouponPurchaseByCustomerId(customerId);
-        //delete customer
         getCustomersDAO().deleteCustomer(customerId);
     }
 
-    public List<Customer> customersList() throws SQLException {
+    public List<Customer> getAllCustomers() throws SQLException {
         return getCustomersDAO().getAllCustomers();
     }
 
-    public Customer customer(int customerId) throws SQLException {
+    public Customer getCustomerByID(int customerId) throws SQLException {
         return getCustomersDAO().getCustomerByID(customerId);
     }
 

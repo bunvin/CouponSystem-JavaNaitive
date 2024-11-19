@@ -37,7 +37,6 @@ public class CouponDaoQuery {
                     "SET `amount` = `amount` + 1\n" +
                     "WHERE `id` = ?;";
 
-
         public static final String GET_CUSTOMER_COUPONS_BY_ID = "SELECT * \n" +
                 "FROM db.customersvscoupons\n" +
                 "INNER JOIN db.coupon\n" +

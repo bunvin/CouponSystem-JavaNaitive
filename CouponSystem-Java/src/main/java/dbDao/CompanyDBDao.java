@@ -116,12 +116,12 @@ public class CompanyDBDao implements CompaniesDAO {
     }
 
     @Override
-    public boolean isCompanyNameAndPasswordExist(String name, String email) throws SQLException, InterruptedException {
+    public boolean isCompanyNameOREmailExist(String name, String email) throws SQLException, InterruptedException {
         Map<Integer, Object> map = Map.of(
                 1, name,
                 2, email
         );
-        ResultSet resultSet = DBManager.createQuery(CompanyDaoQuery.IS_COMPANY_NAME_AND_PASSWORD_EXIST, map, true);
+        ResultSet resultSet = DBManager.createQuery(CompanyDaoQuery.IS_COMPANY_NAME_OR_PASSWORD_EXIST, map, true);
         if(resultSet.next()){
             return true;
         } else {
