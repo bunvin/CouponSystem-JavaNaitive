@@ -30,14 +30,11 @@ public class Test {
 
         Coupon coupon = Coupon.builder()
                 .companyID(1)
-                .title("oldcoupon")
-                .amount(ThreadLocalRandom.current().nextInt(1,10))
-                .category(Category.fromNumericalCategory(1));
-        couponDBDAO.addCoupon(coupon);
-
-
-//        companyFace.addCoupon(coupon);
-
+                .title("coupon")
+                .amount(5)
+                .category(Category.Food);
+        System.out.println(coupon);
+        couponDBDAO.updateCoupon(coupon,8);
 
 
 

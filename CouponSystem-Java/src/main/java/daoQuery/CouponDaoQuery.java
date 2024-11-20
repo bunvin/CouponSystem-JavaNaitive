@@ -4,12 +4,12 @@ import dao.CouponsDAO;
 
 public class CouponDaoQuery {
 
-    public static final String ADD_COUPON = "INSERT INTO `db`.`coupon` (`companyID`, `title`, " + "`categoryID`," +
-            "`description`, `startDate`, `endDate`, `amount`, `price`, `image`) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?);\n";
+    public static final String ADD_COUPON = "INSERT INTO `db`.`coupon` (`companyId`, `categoryId`, `title`, " +
+            "`description`, `startDate`, `endDate`, `amount`, `price`, `image`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
 
 
     public static final String DELETE_COUPON = "DELETE FROM `db`.`coupon` WHERE (`id` = ?);\n";
-    public static final String UPDATE_COUPON = "UPDATE `db`.`coupon` SET `companyID` = ?,`categoryID` = ?, `title` = " +
+    public static final String UPDATE_COUPON = "UPDATE `db`.`coupon` SET `companyID` = ?,`categoryId` = ?, `title` = " +
             "?, `description` = ?, `startDate` = ?, `endDate` = ?, `amount` = ?, `price` = ?, `image` = ? WHERE (`id` = ?);\n";
     public static final String GET_ALL_COUPONS = "SELECT * FROM db.coupon;";
     public static final String GET_COUPON_BY_ID = "SELECT * FROM db.coupon WHERE id = ?";

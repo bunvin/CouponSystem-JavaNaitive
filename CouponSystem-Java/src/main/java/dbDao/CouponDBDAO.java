@@ -10,26 +10,22 @@ import db.DBManager;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CouponDBDAO  implements CouponsDAO  {
 
     @Override
     public void addCoupon(Coupon coupon) throws SQLException {
-        Map<Integer, Object> map = Map.of(
-                1, coupon.getCompanyID(),
-                2, coupon.getTitle(),
-                3, coupon.getCategory().getNumericalCategory(),
-                4, coupon.getDescription(),
-                5, coupon.getStartDate(),
-                6, coupon.getEndDate(),
-                7, coupon.getAmount(),
-                8, coupon.getPrice(),
-                9, coupon.getImage()
-                );
+        Map<Integer, Object> map = new HashMap<>();
+        map.put(1, coupon.getCompanyID());
+        map.put(2, coupon.getCategory().getCategoryId());
+        map.put(3, coupon.getTitle());
+        map.put(4, coupon.getDescription());
+        map.put(5, coupon.getStartDate());
+        map.put(6, coupon.getEndDate());
+        map.put(7, coupon.getAmount());
+        map.put(8, coupon.getPrice());
+        map.put(9, coupon.getImage());
         DBManager.createQuery(CouponDaoQuery.ADD_COUPON, map, false);
         DBManager.closeConnection();
     }
@@ -45,17 +41,17 @@ public class CouponDBDAO  implements CouponsDAO  {
 
     @Override
     public void updateCoupon(Coupon coupon, int id) throws SQLException {
-        Map<Integer, Object> map = Map.of(
-                1, coupon.getCompanyID(),
-                2, coupon.getCategory().getNumericalCategory(),
-                3, coupon.getTitle(),
-                4, coupon.getDescription(),
-                5, coupon.getStartDate(),
-                6, coupon.getEndDate(),
-                7, coupon.getAmount(),
-                8, coupon.getPrice(),
-                9, coupon.getImage()
-        );
+        Map<Integer, Object> map = new HashMap<>();
+        map.put(1, coupon.getCompanyID());
+        map.put(2, coupon.getCategory().getCategoryId());
+        map.put(3, coupon.getTitle());
+        map.put(4, coupon.getDescription());
+        map.put(5, coupon.getStartDate());
+        map.put(6, coupon.getEndDate());
+        map.put(7, coupon.getAmount());
+        map.put(8, coupon.getPrice());
+        map.put(9, coupon.getImage());
+        map.put(10, id);
         DBManager.createQuery(CouponDaoQuery.UPDATE_COUPON, map, false);
         DBManager.closeConnection();
     }
