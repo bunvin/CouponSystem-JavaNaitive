@@ -21,15 +21,15 @@ public class CouponDBDAO  implements CouponsDAO  {
     public void addCoupon(Coupon coupon) throws SQLException {
         Map<Integer, Object> map = Map.of(
                 1, coupon.getCompanyID(),
-                2, coupon.getCategory().getNumericalCategory(),
-                3, coupon.getTitle(),
+                2, coupon.getTitle(),
+                3, coupon.getCategory().getNumericalCategory(),
                 4, coupon.getDescription(),
                 5, coupon.getStartDate(),
                 6, coupon.getEndDate(),
                 7, coupon.getAmount(),
                 8, coupon.getPrice(),
                 9, coupon.getImage()
-        );
+                );
         DBManager.createQuery(CouponDaoQuery.ADD_COUPON, map, false);
         DBManager.closeConnection();
     }
@@ -63,6 +63,19 @@ public class CouponDBDAO  implements CouponsDAO  {
     @Override
     public List<Coupon> getAllCoupons() throws SQLException {
         ResultSet resultSet = DBManager.createQuery(CouponDaoQuery.GET_ALL_COUPONS,null,true);
+        List<Coupon> coupons = new ArrayList<>();
+        while (resultSet.next()){
+            coupons.add(getCoupon(resultSet));
+        }
+        return coupons;
+    }
+
+    @Override
+    public List<Coupon> getCompanyCoupons(int companyId) throws SQLException {
+        Map<Integer, Object> map = Map.of(
+                1, companyId
+        );
+        ResultSet resultSet = DBManager.createQuery(CouponDaoQuery.GET_COUPON_BY_COMPANY_ID,map,true);
         List<Coupon> coupons = new ArrayList<>();
         while (resultSet.next()){
             coupons.add(getCoupon(resultSet));
@@ -132,10 +145,6 @@ public class CouponDBDAO  implements CouponsDAO  {
                 2, couponID
         );
         DBManager.createQuery(CouponDaoQuery.CANCEL_PURCHASE_COUPON, map, false);
-        Map<Integer, Object> map2 = Map.of(
-                1, couponID
-        );
-        DBManager.createQuery(CouponDaoQuery.UPDATE_AMOUNT_CANCEL, map2, false);
         DBManager.closeConnection();
     }
 

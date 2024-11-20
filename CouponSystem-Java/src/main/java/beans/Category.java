@@ -28,7 +28,7 @@ public enum Category {
         throw new IllegalArgumentException("No category found for value: " + numericalCategory);
     }
 
-    public static Category randomUrgency(){
+    public static Category randomCategory(){
         return Category.values()[ThreadLocalRandom.current().nextInt(0,Category.values().length)];
     }
 }

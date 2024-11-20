@@ -13,6 +13,7 @@ public interface CompaniesDAO {
     void deleteCompany(int companyID) throws SQLException, InterruptedException;
     void updateCompany(Company company, int id) throws SQLException;
     Company getCompanyByID(Integer companyID) throws SQLException;
+    Company getCompanyByEmail(String email) throws SQLException;
     List<Company> getAllCompanies() throws SQLException;
     boolean isCompanyExist(String email, String password) throws SQLException, InterruptedException;
     Company getCompany(ResultSet resultSet) throws SQLException;

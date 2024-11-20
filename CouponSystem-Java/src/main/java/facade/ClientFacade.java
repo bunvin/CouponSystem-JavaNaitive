@@ -7,6 +7,8 @@ import dbDao.CompanyDBDao;
 import dbDao.CouponDBDAO;
 import dbDao.CustomerDBDAO;
 
+import java.sql.SQLException;
+
 abstract class ClientFacade {
     private static final CompaniesDAO companiesDAO = new CompanyDBDao();
     private static final CustomersDAO customersDAO = new CustomerDBDAO();
@@ -15,7 +17,7 @@ abstract class ClientFacade {
     public ClientFacade() {
     }
 
-    public boolean login(String email, String password) {
+    public boolean login(String email, String password) throws SQLException, InterruptedException {
         return false;
     }
 

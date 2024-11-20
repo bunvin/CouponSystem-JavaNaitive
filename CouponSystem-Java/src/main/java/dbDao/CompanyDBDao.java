@@ -61,6 +61,20 @@ public class CompanyDBDao implements CompaniesDAO {
     }
 
     @Override
+    public Company getCompanyByEmail(String email) throws SQLException {
+        Map<Integer, Object> map = Map.of(
+                1, email
+        );
+        ResultSet resultSet = DBManager.createQuery(CompanyDaoQuery.GET_ONE_COMPANY_BY_EMAIL, map, true);
+        Company company = null;
+        if (resultSet.next()) {
+            company = getCompany(resultSet);
+        }
+        DBManager.closeConnection();
+        return company;
+    }
+
+    @Override
     public List<Company> getAllCompanies() throws SQLException {
         ResultSet resultSet = DBManager.createQuery(CompanyDaoQuery.GET_ALL_COMPANIES, null, true);
         List<Company> companies = new ArrayList<>();

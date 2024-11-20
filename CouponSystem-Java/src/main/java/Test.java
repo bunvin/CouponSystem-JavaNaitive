@@ -1,3 +1,4 @@
+import beans.Category;
 import beans.Company;
 import beans.Coupon;
 import beans.Customer;
@@ -7,11 +8,13 @@ import dbDao.CompanyDBDao;
 import dbDao.CouponDBDAO;
 import dbDao.CustomerDBDAO;
 import facade.AdminFacade;
+import facade.CompanyFacade;
 import facade.CustomerFacade;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Test {
     public static void main(String[] args) throws Exception {
@@ -20,8 +23,27 @@ public class Test {
         CustomerDBDAO customerDBDAO = new CustomerDBDAO();
         CouponDBDAO couponDBDAO = new CouponDBDAO();
 
+//TESTING CompanyFacade
+        CompanyFacade companyFace = new CompanyFacade();
+        companyFace.login("Sto@email.com","1212");
+        System.out.println("Company Id: "+ (companyFace.getCompanyId()));
+
+        Coupon coupon = Coupon.builder()
+                .companyID(1)
+                .title("oldcoupon")
+                .amount(ThreadLocalRandom.current().nextInt(1,10))
+                .category(Category.fromNumericalCategory(1));
+        couponDBDAO.addCoupon(coupon);
+
+
+//        companyFace.addCoupon(coupon);
+
+
+
+
+
 //Testing AdminFacade
-        AdminFacade adminFace = new AdminFacade();
+//        AdminFacade adminFace = new AdminFacade();
 //        //login
 //        System.out.println(adminFace.login("admin@admin.com","admin"));
 //        System.out.println(adminFace.login("admin@admin.com","admi"));
@@ -63,13 +85,13 @@ public class Test {
 //        System.out.println(adminFace.getCompanyById(5));
 
 //add new client
-        Customer customer = Customer.builder()
-                .firstName("first")
-                .lastName("last")
-                .email("private@email.com")
-                .password("12123"); //existing exception
-        //adminFace.addCustomer(customer);
-        customer.setEmail("new@email.com");
+//        Customer customer = Customer.builder()
+//                .firstName("first")
+//                .lastName("last")
+//                .email("private@email.com")
+//                .password("12123"); //existing exception
+//        //adminFace.addCustomer(customer);
+//        customer.setEmail("new@email.com");
 //        adminFace.addCustomer(customer);
 
 //update client
@@ -93,7 +115,7 @@ public class Test {
 //            System.out.println(client);
 //        }
 //get client by Id
-        System.out.println(adminFace.getCustomerByID(3));
+//        System.out.println(adminFace.getCustomerByID(3));
 
 
 

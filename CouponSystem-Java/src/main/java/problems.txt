@@ -50,3 +50,7 @@ function: getcoupon
 problem: if category is null throw exception
 
 
+dao >> CouponDBDAO
+function: add coupon
+problem: Null exception when coupon category is null
+
