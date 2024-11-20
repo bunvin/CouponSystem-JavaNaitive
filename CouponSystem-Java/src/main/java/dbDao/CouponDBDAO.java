@@ -80,6 +80,33 @@ public class CouponDBDAO  implements CouponsDAO  {
     }
 
     @Override
+    public List<Coupon> getCompanyCategoryCoupons(int companyId, int categoryId) throws SQLException {
+        List<Coupon> coupons = this.getCompanyCoupons(companyId);
+        List<Coupon> filteredList = new ArrayList<>();
+        if(coupons != null) {
+            for (Coupon coupon : coupons) {
+                if (coupon.getCategory().getCategoryId() == categoryId) {
+                    filteredList.add(coupon);
+                }
+            }
+        }
+        return filteredList;
+    }
+
+    @Override
+    public List<Coupon> getCompanyCouponsMaxPrice(int companyId, double maxPrice) throws SQLException {
+        List<Coupon> coupons = this.getCompanyCoupons(companyId);
+        List<Coupon> filteredList = new ArrayList<>();
+        for (Coupon coupon : coupons){
+            if (coupon.getPrice() <= maxPrice){
+                filteredList.add(coupon);
+            }
+        }
+        return filteredList;
+    }
+
+
+    @Override
     public Coupon getCoupon(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
         int companyID = resultSet.getInt("companyId");
@@ -94,7 +121,7 @@ public class CouponDBDAO  implements CouponsDAO  {
         return Coupon.builder()
                 .id(id)
                 .companyID(companyID)
-                //.category(Category.fromNumericalCategory(categoryID))
+                .category(Category.fromNumericalCategory(categoryID))
                 .title(title)
                 .description(description)
                 .startDate(startDate)

@@ -12,6 +12,8 @@ public interface CouponsDAO {
     void updateCoupon(Coupon coupon, int id) throws SQLException;
     List<Coupon> getAllCoupons() throws SQLException;
     List<Coupon> getCompanyCoupons(int companyId) throws SQLException;
+    List<Coupon> getCompanyCategoryCoupons(int companyId, int categoryId) throws SQLException;
+    List<Coupon> getCompanyCouponsMaxPrice(int companyId,double maxPrice) throws SQLException;
     Coupon getCoupon(ResultSet resultSet) throws SQLException;
     Coupon getCouponByID(int couponID) throws SQLException;
     void addCouponPurchase(int customerID, int couponID) throws SQLException;

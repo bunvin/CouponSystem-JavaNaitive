@@ -28,16 +28,28 @@ public class Test {
         companyFace.login("Sto@email.com","1212");
         System.out.println("Company Id: "+ (companyFace.getCompanyId()));
 
-        Coupon coupon = Coupon.builder()
-                .companyID(1)
-                .title("coupon")
-                .amount(5)
-                .category(Category.Food);
-        System.out.println(coupon);
-        couponDBDAO.updateCoupon(coupon,8);
+//        Coupon coupon = Coupon.builder()
+//                .companyID(companyFace.getCompanyId())
+//                .title("coupon")
+//                .amount(5)
+//                .category(Category.Food);
+//        System.out.println(coupon);
 
+//        couponDBDAO.addCouponPurchase(3,10);
+//        companyFace.deleteCoupon(11);
 
+companyFace.getCompanyDetails();
 
+List<Coupon> catCoupons = companyFace.getCompanyCategoryCoupons(2);
+        System.out.println(catCoupons.size());
+//        for(Coupon coupon : catCoupons){
+//            System.out.println(coupon);
+//        }
+//        System.out.println("####");
+//        List<Coupon> catCoupons2 = companyFace.getCompanyCategoryCoupons(1);
+//        for(Coupon coupon : catCoupons2){
+//            System.out.println(coupon);
+//        }
 
 //Testing AdminFacade
 //        AdminFacade adminFace = new AdminFacade();

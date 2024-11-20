@@ -15,28 +15,10 @@ NOTE:
 I didn't understand it all that well
 September 30th recording
 
-db >> DBManager
-function: createQuery
-problem: createQuery without get yellow underline, resultSet = false,
-suggested change function to void
-
 beans >> Company
 function: builder.id
 in use in: getCompany, getCompanyById
 problem: is public, every use of builder can add an id, no setter.
-
-dao >> CompaniesDao
-function: getCompanyByID
-note: changed name
-in instruction name is: "getOneCompany"
-
-facade >> AdminFacade
-function: deleteCustomerById
-problem: when deleting purchase history, need to update coupon amount?
-IDAN: NO NEED TO UPDATE THE AMOUNT WHEN DELETED
-possibility that the coupon already expired and deleted ?.
-need to think and look at it better.
-
 
 facade >> AdminFacade
 function: update Company
@@ -44,13 +26,3 @@ problem: working but ugly if statement
 the if statement targets
 1. Company name == dbCompany name
 2. Company Id == dbCompany Id OR Company Id == 0
-
-dao >> couponDAO
-function: getcoupon
-problem: if category is null throw exception
-
-
-dao >> CouponDBDAO
-function: add coupon
-problem: Null exception when coupon category is null
-
