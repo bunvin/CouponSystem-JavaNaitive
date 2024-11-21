@@ -1,3 +1,4 @@
+import Testing.FactoryUtils;
 import beans.Category;
 import beans.Company;
 import beans.Coupon;
@@ -22,26 +23,51 @@ public class Test {
         CompanyDBDao companyDBDao = new CompanyDBDao();
         CustomerDBDAO customerDBDAO = new CustomerDBDAO();
         CouponDBDAO couponDBDAO = new CouponDBDAO();
+//TESTING CUSTOMER FACADE
+
+//        List<Coupon> coupons = couponDBDAO.getAllCoupons();
+//        for(Coupon coupon: coupons){
+//            //System.out.println(coupon);
+//            coupon.setStartDate(FactoryUtils.randomStart());
+//            coupon.setEndDate(FactoryUtils.randomEnd());
+//            couponDBDAO.updateCoupon(coupon, coupon.getId());
+//        }
+        Customer customer = customerDBDAO.getCustomerByID(7);
+//        couponDBDAO.addCouponPurchase(6,7);
+//        couponDBDAO.addCouponPurchase(6,12);
+//        couponDBDAO.addCouponPurchase(7,12);
+//        couponDBDAO.addCouponPurchase(7,7);
+        List<Coupon> coupons = customer.getCoupons();
+        for(Coupon coupon : coupons){
+            System.out.println(coupon);
+        }
+
+
+
+
+
+
+
 
 //TESTING CompanyFacade
-        CompanyFacade companyFace = new CompanyFacade();
-        companyFace.login("Sto@email.com","1212");
-        System.out.println("Company Id: "+ (companyFace.getCompanyId()));
-
-//        Coupon coupon = Coupon.builder()
-//                .companyID(companyFace.getCompanyId())
-//                .title("coupon")
-//                .amount(5)
-//                .category(Category.Food);
-//        System.out.println(coupon);
-
-//        couponDBDAO.addCouponPurchase(3,10);
-//        companyFace.deleteCoupon(11);
-
-companyFace.getCompanyDetails();
-
-List<Coupon> catCoupons = companyFace.getCompanyCategoryCoupons(2);
-        System.out.println(catCoupons.size());
+//        CompanyFacade companyFace = new CompanyFacade();
+//        companyFace.login("Sto@email.com","1212");
+//        System.out.println("Company Id: "+ (companyFace.getCompanyId()));
+//
+////        Coupon coupon = Coupon.builder()
+////                .companyID(companyFace.getCompanyId())
+////                .title("coupon")
+////                .amount(5)
+////                .category(Category.Food);
+////        System.out.println(coupon);
+//
+////        couponDBDAO.addCouponPurchase(3,10);
+////        companyFace.deleteCoupon(11);
+//
+//companyFace.getCompanyDetails();
+//
+//List<Coupon> catCoupons = companyFace.getCompanyCategoryCoupons(2);
+//        System.out.println(catCoupons.size());
 //        for(Coupon coupon : catCoupons){
 //            System.out.println(coupon);
 //        }

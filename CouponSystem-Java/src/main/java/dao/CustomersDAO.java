@@ -13,6 +13,7 @@ public interface CustomersDAO {
     void updateCustomer(Customer customer, int id) throws SQLException;
     List<Customer> getAllCustomers() throws SQLException;
     Customer getCustomerByID(int customerID) throws SQLException;
+    Customer getCustomerByEmail(String email) throws SQLException;
     boolean isCustomerExist(String email, String password) throws SQLException;
     boolean isCustomerEmailExist(String email) throws SQLException;
     Customer getCustomer(ResultSet resultSet) throws SQLException;

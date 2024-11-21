@@ -5,12 +5,12 @@ import beans.Company;
 import beans.Coupon;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CompanyFacade extends ClientFacade{
 
     int companyId;
+    List<Coupon> companyCoupons;
 
     public CompanyFacade() {
         super();
@@ -21,6 +21,7 @@ public class CompanyFacade extends ClientFacade{
         if (getCompaniesDAO().isCompanyExist(email,password)) {
             Company company = getCompaniesDAO().getCompanyByEmail(email);
             this.companyId = company.getId();
+            this.companyCoupons = getCompaniesDAO().getCompanyCoupons(this.companyId);
             return true;
         } else {
             return false;
@@ -33,9 +34,7 @@ public class CompanyFacade extends ClientFacade{
 
     public void addCoupon(Coupon coupon) throws Exception {
         //not same title in company coupons
-        List<Coupon> companyCouponList = getCompaniesDAO().getCompanyCoupons(this.companyId);
-
-        for (Coupon companyCoupon : companyCouponList){
+        for (Coupon companyCoupon : this.companyCoupons){
             if(coupon.getTitle().equals(companyCoupon.getTitle())){
                 throw new Exception("FAILED: Coupon title already exist in Company Coupon's");
             }
@@ -90,6 +89,10 @@ public class CompanyFacade extends ClientFacade{
         System.out.println("CompanyId: "+company.getId());
         System.out.println("Company Name: "+ company.getName());
         System.out.println("Company Email: "+ company.getEmail());
+        System.out.println("Company coupons: ");
+        for(Coupon coupon : this.companyCoupons){
+            System.out.println(coupon);
+        }
         System.out.println("#############");
     }
 

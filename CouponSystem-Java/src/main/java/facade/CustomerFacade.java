@@ -1,38 +1,98 @@
 package facade;
 
+import beans.Coupon;
 import beans.Customer;
-import dao.CompaniesDAO;
-import dao.CouponsDAO;
-import dao.CustomersDAO;
-import dbDao.CompanyDBDao;
-import dbDao.CouponDBDAO;
-import dbDao.CustomerDBDAO;
-
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-public class CustomerFacade extends ClientFacade{
-//    private final CompaniesDAO companiesDAO;
-//    private final CustomersDAO customersDAO;
-//    private final CouponsDAO couponsDAODAO;
+public class CustomerFacade extends ClientFacade {
+
+    int customerId;
+    List<Coupon> customerCoupons;
 
     public CustomerFacade() {
         super();
     }
 
+    @Override
+    public boolean login(String email, String password) throws SQLException {
+        if (getCustomersDAO().isCustomerExist(email, password)) {
+            Customer customer = getCustomersDAO().getCustomerByEmail(email);
+            this.customerId = customer.getId();
+            this.customerCoupons = getCustomerCoupons();
 
-    public void addCustomer(Customer customer) throws SQLException {
-        //add validation here
-//        getCustomersDAO().addCustomer();
-
-        ;
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    @Override
-    public boolean login(String email, String password) {
-        // Logic for company login
-        // e.g., validate company credentials against CompaniesDAO
-        // Return true if valid, false otherwise
-        return false;
-    };
+    //NEED TO BE TESTED
+    public void purchaseCoupon(int couponId) throws Exception {
+        Coupon dbCoupon = getCouponsDAO().getCouponByID(couponId);
+
+        Customer customer = getCustomersDAO().getCustomerByID(customerId);
+        List<Coupon> coupons = this.customerCoupons;
+
+        if (dbCoupon.getAmount() <= 0) {
+            throw new Exception("FAILED: no available coupons to purchase");
+        }
+        if (dbCoupon.getEndDate().before(new Date())) {
+            throw new Exception("FAILED: coupon is expired");
+        }
+        for (Coupon coupon : coupons) {
+            if (coupon.getId() == couponId) {
+                throw new Exception("FAILED: coupon already purchased by customer");
+            }
+        }
+        getCouponsDAO().addCouponPurchase(this.customerId, couponId);
+
+    }
+
+    public List<Coupon> getCustomerCoupons() throws SQLException {
+        Customer customer = getCustomersDAO().getCustomerByID(this.customerId);
+        return customer.getCoupons();
+    }
+//NEED TO BE TESTED
+    public List<Coupon> getCustomerCouponsByCategory(int categoryId) throws SQLException {
+        List<Coupon> filteredList = new ArrayList<>();
+        for (Coupon coupon : this.customerCoupons) {
+            if (coupon.getCategory().getCategoryId() == categoryId) {
+                filteredList.add(coupon);
+            }
+        }
+        return filteredList;
+    }
+
+    //NEED TO BE TESTED
+    public List<Coupon> getCustomerCouponsByMaxPrice(double maxPrice) throws SQLException {
+        List<Coupon> filteredList = new ArrayList<>();
+        for (Coupon coupon : this.customerCoupons) {
+            if (coupon.getPrice() < maxPrice) {
+                filteredList.add(coupon);
+            }
+        }
+        return filteredList;
+    }
+    //NEED TO BE TESTED
+    public void getCustomerDetails() throws SQLException {
+        Customer customer = getCustomersDAO().getCustomerByID(this.customerId);
+        System.out.println("#############");
+        System.out.println("CustomerId: "+customer.getId());
+        System.out.println("First Name: "+ customer.getFirstName());
+        System.out.println("Last Name: "+customer.getLastName());
+        System.out.println("Customer Email: "+customer.getEmail());
+        System.out.println("Purchase coupons: ");
+        for(Coupon coupon : this.customerCoupons){
+            System.out.println(coupon);
+        }
+        System.out.println("#############");
+    }
+
 
 }
+
+
+

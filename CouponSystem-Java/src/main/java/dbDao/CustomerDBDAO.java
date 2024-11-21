@@ -5,6 +5,7 @@ import beans.Coupon;
 import beans.Customer;
 import dao.CustomersDAO;
 import daoQuery.CompanyDaoQuery;
+import daoQuery.CouponDaoQuery;
 import daoQuery.CustomerDaoQuery;
 import db.DBManager;
 
@@ -70,6 +71,20 @@ public class CustomerDBDAO implements CustomersDAO {
         if (resultSet.next()) {
             customer =  getCustomer(resultSet);
         }
+        return customer;
+    }
+
+    @Override
+    public Customer getCustomerByEmail(String email) throws SQLException {
+        Map<Integer, Object> map = Map.of(
+                1, email
+        );
+        ResultSet resultSet = DBManager.createQuery(CustomerDaoQuery.GET_ONE_CUSTOMER_BY_EMAIL, map, true);
+        Customer customer = null;
+        if (resultSet.next()) {
+            customer = getCustomer(resultSet);
+        }
+        DBManager.closeConnection();
         return customer;
     }
 
