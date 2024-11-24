@@ -9,7 +9,7 @@ import dbDao.CustomerDBDAO;
 
 import java.sql.SQLException;
 
-abstract class ClientFacade {
+public abstract class ClientFacade {
     private static final CompaniesDAO companiesDAO = new CompanyDBDao();
     private static final CustomersDAO customersDAO = new CustomerDBDAO();
     private static final CouponsDAO couponsDAO = new CouponDBDAO();

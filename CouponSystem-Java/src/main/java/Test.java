@@ -9,8 +9,11 @@ import dbDao.CompanyDBDao;
 import dbDao.CouponDBDAO;
 import dbDao.CustomerDBDAO;
 import facade.AdminFacade;
+import facade.ClientFacade;
 import facade.CompanyFacade;
 import facade.CustomerFacade;
+import login.ClientType;
+import login.LoginManager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -23,33 +26,43 @@ public class Test {
         CompanyDBDao companyDBDao = new CompanyDBDao();
         CustomerDBDAO customerDBDAO = new CustomerDBDAO();
         CouponDBDAO couponDBDAO = new CouponDBDAO();
-//TESTING CUSTOMER FACADE
 
-        CustomerFacade customerFacade = new CustomerFacade();
+        //TESTING login
         Customer customer = customerDBDAO.getCustomerByID(6);
-        String password = customer.getPassword();//"1234";
-        String email = customer.getEmail();
-        System.out.println(
-        customerFacade.login(email,password)
-        );
-        customerFacade.getCustomerDetails();
+        Company company = companyDBDao.getCompanyByID(4);
 
-        System.out.println(customerFacade.getCustomerCouponsByCategory(1));
-        System.out.println("#######");
-//        customerFacade.purchaseCoupon(1); //(amount = 0) //date expired
+        LoginManager.getInstance().login(DBManager.ADMIN_EMAIL,DBManager.ADMIN_PASSWORD, ClientType.ADMIN);
 
-//        List<Coupon> couponsMax = customerFacade.getCustomerCouponsByMaxPrice(30);
-//        for(Coupon coupon : couponsMax){
-//            System.out.println("couponId: " + coupon.getId()+ " price: " + coupon.getPrice());
-//        }
-
-        System.out.println("#######");
+        LoginManager.getInstance().login(DBManager.ADMIN_EMAIL,"12132", ClientType.ADMIN);
+        System.out.println("##");
+        LoginManager.getInstance().login(company.getEmail(),company.getPassword(),ClientType.COMPANY);
+        LoginManager.getInstance().login("fakeemail@email.com",company.getPassword(),ClientType.COMPANY);
+        System.out.println("##");
+        LoginManager.getInstance().login(customer.getEmail(), customer.getPassword(), ClientType.CUSTOMER);
+        LoginManager.getInstance().login("customer.getEmail()", customer.getPassword(), ClientType.CUSTOMER);
 
 
-
-
-
-
+        //TESTING CUSTOMER FACADE
+//
+//        CustomerFacade customerFacade = new CustomerFacade();
+//        Customer customer = customerDBDAO.getCustomerByID(6);
+//        String password = customer.getPassword();//"1234";
+//        String email = customer.getEmail();
+//        System.out.println(
+//        customerFacade.login(email,password)
+//        );
+//        customerFacade.getCustomerDetails();
+//
+//        System.out.println(customerFacade.getCustomerCouponsByCategory(1));
+//        System.out.println("#######");
+////        customerFacade.purchaseCoupon(1); //(amount = 0) //date expired
+//
+////        List<Coupon> couponsMax = customerFacade.getCustomerCouponsByMaxPrice(30);
+////        for(Coupon coupon : couponsMax){
+////            System.out.println("couponId: " + coupon.getId()+ " price: " + coupon.getPrice());
+////        }
+//
+//        System.out.println("#######");
 
 
 //TESTING CompanyFacade
