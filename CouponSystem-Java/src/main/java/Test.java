@@ -25,22 +25,25 @@ public class Test {
         CouponDBDAO couponDBDAO = new CouponDBDAO();
 //TESTING CUSTOMER FACADE
 
-//        List<Coupon> coupons = couponDBDAO.getAllCoupons();
-//        for(Coupon coupon: coupons){
-//            //System.out.println(coupon);
-//            coupon.setStartDate(FactoryUtils.randomStart());
-//            coupon.setEndDate(FactoryUtils.randomEnd());
-//            couponDBDAO.updateCoupon(coupon, coupon.getId());
+        CustomerFacade customerFacade = new CustomerFacade();
+        Customer customer = customerDBDAO.getCustomerByID(6);
+        String password = customer.getPassword();//"1234";
+        String email = customer.getEmail();
+        System.out.println(
+        customerFacade.login(email,password)
+        );
+        customerFacade.getCustomerDetails();
+
+        System.out.println(customerFacade.getCustomerCouponsByCategory(1));
+        System.out.println("#######");
+//        customerFacade.purchaseCoupon(1); //(amount = 0) //date expired
+
+//        List<Coupon> couponsMax = customerFacade.getCustomerCouponsByMaxPrice(30);
+//        for(Coupon coupon : couponsMax){
+//            System.out.println("couponId: " + coupon.getId()+ " price: " + coupon.getPrice());
 //        }
-        Customer customer = customerDBDAO.getCustomerByID(7);
-//        couponDBDAO.addCouponPurchase(6,7);
-//        couponDBDAO.addCouponPurchase(6,12);
-//        couponDBDAO.addCouponPurchase(7,12);
-//        couponDBDAO.addCouponPurchase(7,7);
-        List<Coupon> coupons = customer.getCoupons();
-        for(Coupon coupon : coupons){
-            System.out.println(coupon);
-        }
+
+        System.out.println("#######");
 
 
 

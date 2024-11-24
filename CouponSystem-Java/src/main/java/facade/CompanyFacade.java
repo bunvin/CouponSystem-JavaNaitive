@@ -24,6 +24,7 @@ public class CompanyFacade extends ClientFacade{
             this.companyCoupons = getCompaniesDAO().getCompanyCoupons(this.companyId);
             return true;
         } else {
+            System.out.println("FAILED: email or password are incorrect");
             return false;
         }
     };

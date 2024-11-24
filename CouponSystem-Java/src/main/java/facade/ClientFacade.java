@@ -17,7 +17,7 @@ abstract class ClientFacade {
     public ClientFacade() {
     }
 
-    public boolean login(String email, String password) throws SQLException, InterruptedException {
+    public boolean login(String email, String password) throws Exception {
         return false;
     }
 

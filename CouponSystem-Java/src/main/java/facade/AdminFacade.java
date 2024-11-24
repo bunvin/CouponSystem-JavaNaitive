@@ -37,6 +37,7 @@ public class AdminFacade extends ClientFacade{
             isAdmin = true;
             return true;
         }
+        System.out.println("FAILED: email or password are incorrect");
         isAdmin = false;
         return false;
     };

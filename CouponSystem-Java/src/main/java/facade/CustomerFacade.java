@@ -17,7 +17,7 @@ public class CustomerFacade extends ClientFacade {
     }
 
     @Override
-    public boolean login(String email, String password) throws SQLException {
+    public boolean login(String email, String password) throws Exception {
         if (getCustomersDAO().isCustomerExist(email, password)) {
             Customer customer = getCustomersDAO().getCustomerByEmail(email);
             this.customerId = customer.getId();
@@ -25,11 +25,11 @@ public class CustomerFacade extends ClientFacade {
 
             return true;
         } else {
+            System.out.println("FAILED: email or password are incorrect");
             return false;
         }
     }
 
-    //NEED TO BE TESTED
     public void purchaseCoupon(int couponId) throws Exception {
         Coupon dbCoupon = getCouponsDAO().getCouponByID(couponId);
 
@@ -55,7 +55,7 @@ public class CustomerFacade extends ClientFacade {
         Customer customer = getCustomersDAO().getCustomerByID(this.customerId);
         return customer.getCoupons();
     }
-//NEED TO BE TESTED
+
     public List<Coupon> getCustomerCouponsByCategory(int categoryId) throws SQLException {
         List<Coupon> filteredList = new ArrayList<>();
         for (Coupon coupon : this.customerCoupons) {
@@ -66,19 +66,24 @@ public class CustomerFacade extends ClientFacade {
         return filteredList;
     }
 
-    //NEED TO BE TESTED
     public List<Coupon> getCustomerCouponsByMaxPrice(double maxPrice) throws SQLException {
         List<Coupon> filteredList = new ArrayList<>();
         for (Coupon coupon : this.customerCoupons) {
-            if (coupon.getPrice() < maxPrice) {
+            if (coupon.getPrice() <= maxPrice) {
                 filteredList.add(coupon);
             }
         }
         return filteredList;
     }
-    //NEED TO BE TESTED
-    public void getCustomerDetails() throws SQLException {
+
+    public void getCustomerDetails() throws Exception {
         Customer customer = getCustomersDAO().getCustomerByID(this.customerId);
+
+        if(customer == null){
+            throw new Exception("FAILED: no customer is logged-in");
+        }
+
+
         System.out.println("#############");
         System.out.println("CustomerId: "+customer.getId());
         System.out.println("First Name: "+ customer.getFirstName());
