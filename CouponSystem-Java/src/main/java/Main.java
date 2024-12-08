@@ -1,45 +1,41 @@
-import Testing.FactoryUtils;
-import beans.Category;
-import beans.Company;
-import beans.Coupon;
-import beans.Customer;
-import db.ConnectionPool;
+import Testing.Test;
 import db.DBManager;
 import dbDao.CompanyDBDao;
 import dbDao.CouponDBDAO;
+import dbDao.CouponExpirationDailyJob;
 import dbDao.CustomerDBDAO;
-import facade.AdminFacade;
-import facade.ClientFacade;
-import facade.CompanyFacade;
-import facade.CustomerFacade;
-import login.ClientType;
-import login.LoginManager;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-
-public class Test {
+public class Main {
     public static void main(String[] args) throws Exception {
+        DBManager.dropAllTable();
+        DBManager.init();
+        Test.testAll();
+
 //DB DAO TESTING
-        CompanyDBDao companyDBDao = new CompanyDBDao();
-        CustomerDBDAO customerDBDAO = new CustomerDBDAO();
-        CouponDBDAO couponDBDAO = new CouponDBDAO();
+//        CompanyDBDao companyDBDao = new CompanyDBDao();
+//        CustomerDBDAO customerDBDAO = new CustomerDBDAO();
+//        CouponDBDAO couponDBDAO = new CouponDBDAO();
+//
+//        //Coupon Job testing
+//        CouponExpirationDailyJob.run();
+//        CouponExpirationDailyJob.stop();
 
-        //TESTING login
-        Customer customer = customerDBDAO.getCustomerByID(6);
-        Company company = companyDBDao.getCompanyByID(4);
 
-        LoginManager.getInstance().login(DBManager.ADMIN_EMAIL,DBManager.ADMIN_PASSWORD, ClientType.ADMIN);
 
-        LoginManager.getInstance().login(DBManager.ADMIN_EMAIL,"12132", ClientType.ADMIN);
-        System.out.println("##");
-        LoginManager.getInstance().login(company.getEmail(),company.getPassword(),ClientType.COMPANY);
-        LoginManager.getInstance().login("fakeemail@email.com",company.getPassword(),ClientType.COMPANY);
-        System.out.println("##");
-        LoginManager.getInstance().login(customer.getEmail(), customer.getPassword(), ClientType.CUSTOMER);
-        LoginManager.getInstance().login("customer.getEmail()", customer.getPassword(), ClientType.CUSTOMER);
+
+//        //TESTING login
+//        Customer customer = customerDBDAO.getCustomerByID(6);
+//        Company company = companyDBDao.getCompanyByID(4);
+//
+//        LoginManager.getInstance().login(DBManager.ADMIN_EMAIL,DBManager.ADMIN_PASSWORD, ClientType.ADMIN);
+//
+//        LoginManager.getInstance().login(DBManager.ADMIN_EMAIL,"12132", ClientType.ADMIN);
+//        System.out.println("##");
+//        LoginManager.getInstance().login(company.getEmail(),company.getPassword(),ClientType.COMPANY);
+//        LoginManager.getInstance().login("fakeemail@email.com",company.getPassword(),ClientType.COMPANY);
+//        System.out.println("##");
+//        LoginManager.getInstance().login(customer.getEmail(), customer.getPassword(), ClientType.CUSTOMER);
+//        LoginManager.getInstance().login("customer.getEmail()", customer.getPassword(), ClientType.CUSTOMER);
 
 
         //TESTING CUSTOMER FACADE

@@ -58,7 +58,7 @@ public class CustomerFacade extends ClientFacade {
 
     public List<Coupon> getCustomerCouponsByCategory(int categoryId) throws SQLException {
         List<Coupon> filteredList = new ArrayList<>();
-        for (Coupon coupon : this.customerCoupons) {
+        for (Coupon coupon : getCustomerCoupons()) {
             if (coupon.getCategory().getCategoryId() == categoryId) {
                 filteredList.add(coupon);
             }
@@ -68,7 +68,7 @@ public class CustomerFacade extends ClientFacade {
 
     public List<Coupon> getCustomerCouponsByMaxPrice(double maxPrice) throws SQLException {
         List<Coupon> filteredList = new ArrayList<>();
-        for (Coupon coupon : this.customerCoupons) {
+        for (Coupon coupon : getCustomerCoupons()) {
             if (coupon.getPrice() <= maxPrice) {
                 filteredList.add(coupon);
             }
@@ -90,7 +90,7 @@ public class CustomerFacade extends ClientFacade {
         System.out.println("Last Name: "+customer.getLastName());
         System.out.println("Customer Email: "+customer.getEmail());
         System.out.println("Purchase coupons: ");
-        for(Coupon coupon : this.customerCoupons){
+        for(Coupon coupon : customer.getCoupons()){
             System.out.println(coupon);
         }
         System.out.println("#############");

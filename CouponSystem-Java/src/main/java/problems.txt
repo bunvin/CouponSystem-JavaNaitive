@@ -26,3 +26,11 @@ problem: working but ugly if statement
 the if statement targets
 1. Company name == dbCompany name
 2. Company Id == dbCompany Id OR Company Id == 0
+
+
+dbDAO >> CouponExpirationDailyJob
+function: run
+problem: when checking how long to midnight, it gives a negative milliseconds from the start of the day
+fix: calculate now until 23:59 and added a minute when checking
+
+

@@ -37,6 +37,8 @@ public class DBManager {
             "  `name` VARCHAR(45) NULL,\n" +
             "  PRIMARY KEY (`id`));";
 
+    public static final String ADD_CATEGORIES_TO_TABLE = "INSERT INTO `db`.`category` (`name`) VALUES ('Food'), ('Electricity'), ('Restaurant'), ('Vacation');";
+
     public static final String ADD_COUPON_TABLE = "CREATE TABLE `db`.`coupon` (\n" +
             "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
             "  `companyId` INT NULL,\n" +
@@ -87,7 +89,7 @@ public class DBManager {
             "  ON UPDATE NO ACTION;";
 
     public static final String DROP_ALL = "DROP TABLE `db`.`company`, `db`.`coupon`, `db`.`category`, `db`.`customer`, `db`.`customersvscoupons`;";
-
+//public static final String DROP_SCHEMA = "DROP SCHEMA couponsystemdb";
     public static ResultSet createQuery(String query, Map<Integer, Object> map, boolean isResultSet) throws SQLException {
         Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
         PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -115,9 +117,11 @@ public class DBManager {
 
         createQuery(ADD_COMPANY_TABLE, null, false);
         createQuery(ADD_CUSTOMER_TABLE, null, false);
-        createQuery(ADD_CATEGORY_TABLE, null, false);
+        createQuery(ADD_CATEGORY_TABLE, null, false);//full table with categories
         createQuery(ADD_COUPON_TABLE, null, false);
         createQuery(ADD_CUSTOMERS_VS_COUPONS_TABLE, null, false);
+        createQuery(ADD_CATEGORIES_TO_TABLE,null,false); //all categories
+
     }
 
     public static void dropAllTable() throws SQLException, InterruptedException {

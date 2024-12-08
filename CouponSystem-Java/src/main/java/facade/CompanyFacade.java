@@ -29,10 +29,6 @@ public class CompanyFacade extends ClientFacade{
         }
     };
 
-    public int getCompanyId() {
-        return companyId;
-    }
-
     public void addCoupon(Coupon coupon) throws Exception {
         //not same title in company coupons
         for (Coupon companyCoupon : this.companyCoupons){
@@ -72,6 +68,14 @@ public class CompanyFacade extends ClientFacade{
         getCouponsDAO().deleteCoupon(id);
     }
 
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public Coupon getCouponById(int id) throws SQLException {
+        return getCouponsDAO().getCouponByID(id);
+    }
+
     public List<Coupon> getCompanyCoupons() throws SQLException {
         return getCouponsDAO().getCompanyCoupons(this.companyId);
     }
@@ -86,15 +90,15 @@ public class CompanyFacade extends ClientFacade{
 
     public void getCompanyDetails() throws SQLException {
         Company company = getCompaniesDAO().getCompanyByID(this.companyId);
-        System.out.println("#############");
+        System.out.println("##### Company Details #####");
         System.out.println("CompanyId: "+company.getId());
         System.out.println("Company Name: "+ company.getName());
         System.out.println("Company Email: "+ company.getEmail());
         System.out.println("Company coupons: ");
-        for(Coupon coupon : this.companyCoupons){
+        for(Coupon coupon : this.getCompanyCoupons()){
             System.out.println(coupon);
         }
-        System.out.println("#############");
+        System.out.println("##########");
     }
 
 

@@ -42,22 +42,22 @@ public class AdminFacade extends ClientFacade{
         return false;
     };
 
-    public void addCompany(Company company) throws Exception {
+    public Company addCompany(Company company) throws Exception {
         //if company name and email not in database?
         if(getCompaniesDAO().isCompanyNameOREmailExist(company.getName(), company.getEmail())){
             throw new Exception("FAILED: Company's name or email already exist");
         }else{
             getCompaniesDAO().addCompany(company);
         }
+        Company companyDB = getCompaniesDAO().getCompanyByEmail(company.getEmail());
+        return companyDB;
     }
 
     public void updateCompany(Company company, int companyId) throws Exception {
         //if name and id are equal update
         Company dbCompany = getCompaniesDAO().getCompanyByID(companyId);
-        if (company.getName().equals(dbCompany.getName())
-        && company.getId() == dbCompany.getId()
-        || company.getName().equals(dbCompany.getName())
-                && company.getId() == 0){
+        if ( company.getName().equals(dbCompany.getName()) && company.getId() == dbCompany.getId()
+        || company.getName().equals(dbCompany.getName()) && company.getId() == 0){
             getCompaniesDAO().updateCompany(company,companyId);
         }else{
             throw new Exception("FAILED: Companies name or id are un-updatable");
@@ -100,6 +100,10 @@ public class AdminFacade extends ClientFacade{
         return getCompaniesDAO().getCompanyByID(id);
     }
 
+    public Company getCompanyByEmail(String email) throws SQLException {
+        return getCompaniesDAO().getCompanyByEmail(email);
+    }
+
     public void addCustomer(Customer customer) throws Exception {
         if ( getCustomersDAO().isCustomerEmailExist(customer.getEmail())){
             throw new Exception("FAILED: email is unavailable");
@@ -109,7 +113,7 @@ public class AdminFacade extends ClientFacade{
 
     //NEED TESTING
     public void updateCustomer(Customer customer, int customerId) throws Exception {
-        if (customerId == customer.getId()){
+        if (customerId == customer.getId() || customer.getId() == 0){
             getCustomersDAO().updateCustomer(customer,customerId);
         } else {
             throw new Exception("FAILED: customer ID is un-updatable");
@@ -133,5 +137,8 @@ public class AdminFacade extends ClientFacade{
         return getCustomersDAO().getCustomerByID(customerId);
     }
 
+    public Customer getCustomerByEmail(String email) throws SQLException {
+        return getCustomersDAO().getCustomerByEmail(email);
+    }
 
 }

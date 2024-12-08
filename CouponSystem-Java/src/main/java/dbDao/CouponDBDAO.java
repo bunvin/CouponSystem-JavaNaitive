@@ -17,6 +17,7 @@ public class CouponDBDAO  implements CouponsDAO  {
 
     @Override
     public void addCoupon(Coupon coupon) throws SQLException {
+        //MapOf() didn't worked with some null values, changes to map for testing
         Map<Integer, Object> map = new HashMap<>();
         map.put(1, coupon.getCompanyID());
         map.put(2, coupon.getCategory().getCategoryId());
