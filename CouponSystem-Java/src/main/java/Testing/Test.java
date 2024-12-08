@@ -22,7 +22,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Test {
     public static void testAll() throws Exception {
 
-//        CouponExpirationDailyJob.run();
+        CouponExpirationDailyJob.run();
         System.out.println("########## ADMIN FACADE ##########");
 
         AdminFacade adminFacade;
@@ -223,8 +223,6 @@ public class Test {
         List<Coupon> pickedCoupons = new ArrayList<>();
         boolean wasPurchased = false;
 
-
-
         while(pickedCoupons.size() < 5){
             Coupon randomCoupon = allCoupons.get(ThreadLocalRandom.current().nextInt(allCoupons.size()));
             //check if coupon was picked
@@ -266,31 +264,36 @@ public class Test {
 
         customerFacade.getCustomerDetails();
 
+        System.out.println("5 coupon end date updated to Expired");
+        //random pick 5 coupons out of all coupons
+        //change to expired endDate
+        allCoupons = adminFacade.getCouponsDAO().getAllCoupons();
+        pickedCoupons = new ArrayList<>();
+        wasPurchased = false;
+
+        while(pickedCoupons.size() < 5){
+            Coupon randomCoupon = allCoupons.get(ThreadLocalRandom.current().nextInt(allCoupons.size()));
+            //check if coupon was picked
+            for( Coupon coupon : pickedCoupons){
+                if (randomCoupon.getId() == coupon.getId()){
+                    wasPurchased = true;
+                    break;
+                }
+            }
+            if (wasPurchased){
+                wasPurchased = false;
+            }else{
+                pickedCoupons.add(randomCoupon);
+                randomCoupon.setEndDate(FactoryUtils.randomExpiredDate());
+                companyFacade.updateCoupon(randomCoupon, randomCoupon.getId());
+                System.out.println(randomCoupon.getEndDate());
+            }
+        }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        CouponExpirationDailyJob.stop();
-//        DBManager.closeConnection();
+        CouponExpirationDailyJob.stop();
+        DBManager.closeConnection();
 
     }
 };

@@ -42,8 +42,6 @@ public class CompanyFacade extends ClientFacade{
     public void updateCoupon(Coupon coupon, int id) throws Exception {
         //coupon id not updatable, company id not updatable
         Coupon dbCoupon = getCouponsDAO().getCouponByID(id);
-        System.out.println(coupon.getId());
-
         if (coupon.getId() != 0 && coupon.getId() != id){
             throw new Exception("FAILED: couponID or companyID cannot be updated");
         }
@@ -66,10 +64,6 @@ public class CompanyFacade extends ClientFacade{
             getCouponsDAO().deleteCouponPurchaseByCouponId(id);
         }
         getCouponsDAO().deleteCoupon(id);
-    }
-
-    public int getCompanyId() {
-        return companyId;
     }
 
     public Coupon getCouponById(int id) throws SQLException {

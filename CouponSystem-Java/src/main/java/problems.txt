@@ -34,3 +34,5 @@ problem: when checking how long to midnight, it gives a negative milliseconds fr
 fix: calculate now until 23:59 and added a minute when checking
 
 
+CouponExpirationDailyJob >> stop
+problem: how to make the program stop running?
