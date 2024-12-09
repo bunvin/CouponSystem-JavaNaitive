@@ -22,7 +22,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Test {
     public static void testAll() throws Exception {
 
-        CouponExpirationDailyJob.run();
+        Thread thread = CouponExpirationDailyJob.run();
         System.out.println("########## ADMIN FACADE ##########");
 
         AdminFacade adminFacade;
@@ -290,10 +290,8 @@ public class Test {
             }
         }
 
-
-
-        CouponExpirationDailyJob.stop();
-        DBManager.closeConnection();
+        CouponExpirationDailyJob.stop(thread);
+        DBManager.closeAllConnections();
 
     }
 };

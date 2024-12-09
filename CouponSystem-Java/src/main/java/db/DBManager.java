@@ -7,6 +7,7 @@ package db;
 //functions - createQuery, init(), dropAllTable()
 
 import java.sql.*;
+import java.util.List;
 import java.util.Map;
 
 public class DBManager {
@@ -110,6 +111,14 @@ public class DBManager {
     public static void closeConnection() throws SQLException {
         Connection connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
         connection.close();
+    }
+
+    public static void closeAllConnections() throws SQLException {
+        List<Connection> connectionList = ConnectionPool.getConnectionPool().getConnectionList();
+        for (Connection connection : connectionList){
+            connection.close();
+        }
+        System.out.println("All connections are closed");
     }
 
 

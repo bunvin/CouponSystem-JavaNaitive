@@ -15,12 +15,13 @@ public class CouponExpirationDailyJob {
 
     public CouponExpirationDailyJob() {}
 
-    public static void stop(){
+    public static void stop(Thread thread){
         quit = true;
+        thread.interrupt();
         System.out.println("stopped");
     }
 
-    public static void run(){
+    public static Thread run(){
         Runnable runnable = new Runnable() {
 
             @Override
@@ -87,8 +88,7 @@ public class CouponExpirationDailyJob {
     //running the thread
         Thread thread = new Thread(runnable);
         thread.start();
+        return thread;
     }
-
-
 
 }
