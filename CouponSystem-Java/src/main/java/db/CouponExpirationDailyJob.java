@@ -1,7 +1,8 @@
-package dbDao;
+package db;
 
 import beans.Coupon;
 import dao.CouponsDAO;
+import dbDao.CouponDBDAO;
 
 import java.sql.SQLException;
 import java.time.Duration;
@@ -58,6 +59,15 @@ public class CouponExpirationDailyJob {
 
                     System.out.println("FINISHED: Job is done, expired coupons are deleted");
 
+
+                    //TESTING- SHORT SLEEP
+//                    try {
+//                        Thread.sleep(30000);
+//                    } catch (InterruptedException e) {
+//                        throw new RuntimeException(e);
+//                    }
+
+                   // activate job at midnight
                     if (isFirstRun) {
                         //calculate time between now and 00:00
                         LocalTime now = LocalTime.now();

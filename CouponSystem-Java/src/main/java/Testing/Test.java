@@ -4,7 +4,7 @@ import beans.Company;
 import beans.Coupon;
 import beans.Customer;
 import db.DBManager;
-import dbDao.CouponExpirationDailyJob;
+import db.CouponExpirationDailyJob;
 import facade.AdminFacade;
 import facade.ClientFacade;
 import facade.CompanyFacade;
@@ -12,17 +12,18 @@ import facade.CustomerFacade;
 import login.ClientType;
 import login.LoginManager;
 
-import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Test {
     public static void testAll() throws Exception {
 
+        DBManager.dropAllTable();
+        DBManager.init();
+
         Thread thread = CouponExpirationDailyJob.run();
+
         System.out.println("########## ADMIN FACADE ##########");
 
         AdminFacade adminFacade;
@@ -286,10 +287,17 @@ public class Test {
                 pickedCoupons.add(randomCoupon);
                 randomCoupon.setEndDate(FactoryUtils.randomExpiredDate());
                 companyFacade.updateCoupon(randomCoupon, randomCoupon.getId());
-                System.out.println(randomCoupon.getEndDate());
+//                System.out.println(randomCoupon.getEndDate());
             }
         }
 
+        allCoupons = adminFacade.getCouponsDAO().getAllCoupons();
+        System.out.println("All coupons before job");
+        for(Coupon coupon: allCoupons){
+            System.out.println(coupon);
+        }
+
+        //Closing
         CouponExpirationDailyJob.stop(thread);
         DBManager.closeAllConnections();
 
